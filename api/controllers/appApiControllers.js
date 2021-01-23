@@ -22,7 +22,7 @@ const getApps = (req, res) => {
 
   let start = 1;
   let end = 5;
-  let max = 5;
+  let max;
   let order = "asc";
 
   if (req.query.start) {
@@ -34,7 +34,10 @@ const getApps = (req, res) => {
   }
   if (req.query.max) {
     max = Number(req.query.max);
+  } else {
+    max = end - start;
   }
+
   if (req.query.order) {
     order = req.query.order;
   }
@@ -52,8 +55,11 @@ const getApps = (req, res) => {
     endIndex = end;
   }
 
+  // if there is no max but there is start & end, and end - start
+
   console.log("startIndex: ", startIndex);
   console.log("endIndex: ", endIndex);
+  console.log("-------------------");
 
   const paginatedApps = apps.slice(startIndex, endIndex);
   res.json(paginatedApps);
