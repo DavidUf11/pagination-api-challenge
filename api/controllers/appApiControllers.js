@@ -14,13 +14,47 @@ const apps = [
 ];
 
 const getApps = (req, res) => {
-  const start = req.query.start;
-  const max = req.query.max;
-  const startIndex = start - 1;
-  const endIndex = startIndex + Number(max);
+  // empty obj not OK b/c by required.
+  // add logic for handling "by" param missing error
 
-  const paginatedApps = apps.slice(startIndex, endIndex);
-  res.json(paginatedApps);
+  if (req.query.by === "id") {
+    // logic
+  }
+
+  const by = req.query.by;
+
+  let start = 0;
+  let end = 50;
+  let max = 50;
+  let order = "asc";
+
+  if (req.query.start) {
+    start = Number(req.query.start);
+    end = start + 50;
+  }
+  if (req.query.end) {
+    end = Number(req.query.end);
+  }
+  if (req.query.max) {
+    max = Number(req.query.max);
+  }
+  if (req.query.order) {
+    order = req.query.order;
+  }
+
+  console.log("start: ", start);
+  console.log("end: ", end);
+  console.log("max: ", max);
+  console.log("order: ", order);
+  console.log("by: ", by);
+
+  res.json("hi");
+
+  // start and max
+  //   const startIndex = start - 1;
+  //   const endIndex = startIndex + Number(max);
+  //   const paginatedApps = apps.slice(startIndex, endIndex);
+  //   res.json(paginatedApps);
 };
 
 module.exports = getApps;
