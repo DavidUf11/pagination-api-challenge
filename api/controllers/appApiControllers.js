@@ -14,7 +14,13 @@ const apps = [
 ];
 
 const getApps = (req, res) => {
-  res.json(apps);
+  const start = req.query.start;
+  const max = req.query.max;
+  const startIndex = start - 1;
+  const endIndex = startIndex + Number(max);
+
+  const paginatedApps = apps.slice(startIndex, endIndex);
+  res.json(paginatedApps);
 };
 
 module.exports = getApps;
