@@ -1,15 +1,8 @@
 const express = require("express"),
-  app = express();
+  app = express(),
+  getApps = require("./api/controllers/appApiControllers");
 
-const apps = [
-  { id: 1, name: "my-app-001" },
-  { id: 2, name: "my-app-002" },
-  { id: 3, name: "my-app-003" },
-];
-
-app.get("/apps", (req, res) => {
-  res.json(apps);
-});
+app.get("/apps", getApps);
 
 port = process.env.PORT || 4000;
 
