@@ -16,23 +16,21 @@ Making a `GET` request on the `/apps` endpoint
 |  `end` | no   | Any number between zero and the number of items in the data set    |
 |  `order` | no   | asc, desc    |
 
-#### Default Values
-- `by`: "id"
-- `start`: "1"
-- `end`: "50"
-- `max`: "50"
-- `order`: "asc"
+### Default Values
+| Key | Value |
+| :--- | :--- |
+|`by`| id |
+|`start`| 1 |
+|`end`| 50 |
+|`max` | 50 |
+|`order`| asc |
 
-#### Examples
+### Examples
 
-Request: `GET` from `https://pagination-api-challenge.herokuapp.com/apps?by=id&start=3&end=7&order=desc` 
+Request: `GET` from `https://pagination-api-challenge.herokuapp.com/apps?by=id&start=3&end=6&order=desc` 
 Response: 
 ```
 [
-    {
-        "id": 7,
-        "name": "my-app-007"
-    },
     {
         "id": 6,
         "name": "my-app-006"
