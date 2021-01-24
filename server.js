@@ -4,7 +4,7 @@ const express = require("express"),
 
 app.get("/apps", getApps);
 
-app.get("", (req, res) => res.json("Welcome to David's paginated API."));
+app.get("", (req, res) => res.send("Welcome to David's paginated API."));
 
 port = process.env.PORT || 4000;
 app.listen(port);
