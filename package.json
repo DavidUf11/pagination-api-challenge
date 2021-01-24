@@ -1,8 +1,9 @@
 {
-  "name": "paginationApiChallenge",
+  "name": "pagination-api-challenge",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "Daviduf11 <ufberg.david@gmail.com>",
+  "author": "Daviduf11 <ufberg.david@gmail.com> (https://daviduf.com)",
+  "description": "An HTTP endpoint which performs pagination on a seeded dataset, built as part of a QA Challenge",
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1"
