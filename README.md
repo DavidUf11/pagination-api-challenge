@@ -75,7 +75,9 @@ If no range paramaters are provided, the response will be issued according to th
 When a request is made, we first check if the request contains at least one query:
 ```
 if (JSON.stringify(req.query) !== "{}") {
-// logic for handling a request with one or multiple queries
+// handling a request with one or multiple queries
+} else {
+// sending the response based on default paramater values
 }
 ```
 
