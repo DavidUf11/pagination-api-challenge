@@ -11,7 +11,7 @@ If requesting data within a certain range, the following query parameters are av
 |  `by` | yes*   | id, name    |
 |  `start` | no   | if ordering by id, any number corresponding to an id within the data set; if ordering by name, a name of any app within the data set |
 |  `end` | no   | if ordering by id, any number corresponding to an id within the data set; if ordering by name, a name of any app within the data set |
-|  `end` | no   | any number between zero and the number of items in the data set (seeded data set contains 105 entries) |
+|  `max` | no   | any number between zero and the number of items in the data set (seeded data set contains 105 entries) |
 |  `order` | no   | asc, desc    |
 
 *Not required if making a request with no range parameters, e.g. `GET` from `/apps`
@@ -28,7 +28,7 @@ If no range paramaters are provided, the response will be issued according to th
 
 ### Examples
 
-**Request:** `GET` from `https://pagination-api-challenge.herokuapp.com/apps?by=id&start=4&end=6&order=desc` 
+**Request:** `GET` from `/apps?by=id&start=4&end=6&order=desc` 
 <br/>
 **Response:** 
 ```json
@@ -48,7 +48,7 @@ If no range paramaters are provided, the response will be issued according to th
 ]
 ```
 ---
-**Request:** `GET` from `https://pagination-api-challenge.herokuapp.com/apps?by=name&start=my-app-027&max=3`  
+**Request:** `GET` from `/apps?by=name&start=my-app-027&max=3`  
 **Response:**
 ```json
 [
@@ -74,24 +74,38 @@ If no range paramaters are provided, the response will be issued according to th
 - [Express](https://expressjs.com/) as a server framework
 
 ### Logic
-To issue a response, we `slice` the data set using start and end indices according to the request's query parameters (or default values). This subset is returned to the user in JSON format.   
+To issue a response, we `slice` the data set using start and end indices according to the request's query values (or default values). This subset is returned to the user in JSON format.   
 <br/>
 When a request is made, we first check if the request contains at least one query parameter:
 ```
 if (JSON.stringify(req.query) !== "{}") {
-    // generating response data based on query paramaters
+    // generate response data based on query paramaters
 } else {
-    // generating  response data based on default values
+    // generate  response data based on default values
 }
 ```
 If the request contains no parameters, we sort the data by `id` in ascending order, and assign default `start` and `end` values:
 ```
 apps.sort((a, b) => (a.id > b.id ? 1 : -1));
-    start = 1;
-    end = 50;
+start = 1;
+end = 50;
 ```
-If the request contains at least one paramater, we first check the `by` parameter – whether it exists and is a valid value, and then whether to sort by `id` or `name`.  
-<br>
+If the request contains at least one paramater, we first check the `by` parameter – whether it exists and is a valid value, and then whether to sort by `id` or `name`. This check is first as the value of `by` defines how we assign other paramater values.  
+```
+if (!req.query.by) {
+    res.send('Invalid query. "By" paramater is required; valid values are "id" and "name".');
+} else {
+    if (req.query.by === "id") {
+        sortById = true;
+        // logic to assign start, end, and max values
+      } else if (req.query.by === "name") {
+        sortById = false;
+        // logic to assign start, end, and max values
+      } else {
+        res.send('Invalid "by" value. The only valid values are "id" and "name".');
+      }
+  }
+```
 Next we assign values for `start`, `max`, and `end` according to the query (or default values if they are not specified). If sorting by `id`, we simply use the numbers query values for `start`, `max`, and `end`. If sorting by `name`, we `slice` the last three chartacters of the `start` and `end` values to assign `start` and `end` values.   
 <br/> 
 Handling cases in which both an `end` and `max` value are defined, we defer to `max` if the `end` value extends beyond what can fit inside the
