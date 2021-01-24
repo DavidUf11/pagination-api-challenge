@@ -7,19 +7,19 @@ An API for accessing a seeeded data set of apps that returns paginated, JSON-for
 
 
 Making a `GET` request on the `/apps` endpoint  
-
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
 \begin{table}[]
-\begin{tabular}{|l|l|l|}
-\hline
-\textbf{Param} & \textbf{Required?} & \textbf{Valid Values}                                                                                      \\ \hline
-by             & yes                & id, name                                                                                                   \\ \hline
-start          & no                 & Any \# within the data set if ordering by id, or a name of any app within the data set if ordering by name \\ \hline
-end            & no                 &                                                                                                            \\ \hline
-max            & no                 &                                                                                                            \\ \hline
-order          & no                 & asc, desc                                                                                                  \\ \hline
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Param}              & \textbf{Required?}       & \textbf{Valid Values}                                                                                                           \\ \midrule
+\multicolumn{1}{|l|}{by}    & \multicolumn{1}{l|}{yes} & \multicolumn{1}{l|}{id, name}                                                                                                   \\ \midrule
+\multicolumn{1}{|l|}{start} & \multicolumn{1}{l|}{no}  & \multicolumn{1}{l|}{Any \# within the data set if ordering by id, or a name of any app within the data set if ordering by name} \\ \midrule
+\multicolumn{1}{|l|}{end}   & \multicolumn{1}{l|}{no}  & \multicolumn{1}{l|}{}                                                                                                           \\ \midrule
+\multicolumn{1}{|l|}{max}   & \multicolumn{1}{l|}{no}  & \multicolumn{1}{l|}{}                                                                                                           \\ \midrule
+order                       & no                       & asc, desc                                                                                                                       \\ \bottomrule
 \end{tabular}
 \end{table}
-
 - Paramaters 
   - required/not
   - expected response
