@@ -90,9 +90,9 @@ apps.sort((a, b) => (a.id > b.id ? 1 : -1));
     start = 1;
     end = 50;
 ```
-If the request contains at least one paramater, we first check the `by` parameter – whether it exists and is a valid value, and then whether to sort by `id` or `name`.
+If the request contains at least one paramater, we first check the `by` parameter – whether it exists and is a valid value, and then whether to sort by `id` or `name`.  
 <br>
-Next we assign values for `start`, `max`, and `end` according to the query (or default values if they are not specified). If sorting by `id`, we simply use the numbers query values for `start`, `max`, and `end`. If sorting by `name`, we `slice` the last three chartacters of the `start` and `end` values to assign `start` and `end` values. 
+Next we assign values for `start`, `max`, and `end` according to the query (or default values if they are not specified). If sorting by `id`, we simply use the numbers query values for `start`, `max`, and `end`. If sorting by `name`, we `slice` the last three chartacters of the `start` and `end` values to assign `start` and `end` values.   
 <br/> 
 Handling cases in which both an `end` and `max` value are defined, we defer to `max` if the `end` value extends beyond what can fit inside the
 maximum page:
