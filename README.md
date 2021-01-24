@@ -123,7 +123,7 @@ if (end > start + max) {
     end = start + max - 1;
 }
 ```
-Lastly, we check if an `order` query was sent and order the matching data accordingly, sorting by the appropriate `by` identifier. Since `asc` is the default, we only need to check for `desc` or invalid values. 
+Lastly, we check if an `order` query was sent and order the matching data accordingly, sorting by the appropriate `by` identifier (below). Since `asc` is the default, we only need to check for `desc` or invalid values. 
 ```JavaScript
 if (req.query.order) {
     if (req.query.order === "desc") {
@@ -133,7 +133,7 @@ if (req.query.order) {
     } else if (req.query.order !== "asc")
         res.send('Invalid "order" value. The only valid values are "asc" and "desc".');
 ```
-Ultimately we issue a response in JSON format containing the paginated subset of data, where `apps` is the original, seeded data set. 
+Ultimately we issue a response in JSON format containing the paginated subset of data, where `apps` is the original, seeded data set: 
 ```JavaScript
 matchingApps = apps.slice(start - 1, end);
 res.json(matchingApps);
