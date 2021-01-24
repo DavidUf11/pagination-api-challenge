@@ -13,6 +13,7 @@ If requesting data within a certain range, the following query parameters are av
 |  `end` | no   | if ordering by id, any number corresponding to an id within the data set; if ordering by name, a name of any app within the data set |
 |  `end` | no   | any number between zero and the number of items in the data set (seeded data set contains 105 entries) |
 |  `order` | no   | asc, desc    |
+
 *Not required if making a request without range parameters 
 
 ### Default Values
