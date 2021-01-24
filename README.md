@@ -1,5 +1,5 @@
 # Pagination API Challenge
-An API for accessing a seeeded data set of apps that returns paginated, JSON-format app data according to user queries. 
+An API for accessing a seeded data set of apps that returns paginated, JSON-format app data according to user queries. 
 
 ## Usage
 
@@ -9,9 +9,9 @@ If requesting data within a certain range, the following query parameters are av
 | Parameters       | Required?     | Valid Values|
 | :------------- | :----------: | :----------- |
 |  `by` | yes   | id, name    |
-|  `start` | no   | Any number corresponding to an id within the data set if ordering by id, or a name of any app within the data set if ordering by name    |
-|  `end` | no   | Any number corresponding to an id within the data set if ordering by id, or a name of any app within the data set if ordering by name     |
-|  `end` | no   | Any number between zero and the number of items in the data set    |
+|  `start` | no   | If ordering by id, any number corresponding to an id within the data set; if ordering by name, a name of any app within the data set |
+|  `end` | no   | If ordering by id, any number corresponding to an id within the data set; if ordering by name, a name of any app within the data set |
+|  `end` | no   | Any number between zero and the number of items in the data set (seeded data set contains 105 entries) |
 |  `order` | no   | asc, desc    |
 
 ### Default Values
@@ -45,6 +45,29 @@ Response:
     {
         "id": 3,
         "name": "my-app-003"
+    }
+]
+```
+
+Request `GET` from `https://pagination-api-challenge.herokuapp.com/apps?by=name&start=my-app-027&max=4`
+Response:
+```
+[
+    {
+        "id": 27,
+        "name": "my-app-027"
+    },
+    {
+        "id": 28,
+        "name": "my-app-028"
+    },
+    {
+        "id": 29,
+        "name": "my-app-029"
+    },
+    {
+        "id": 30,
+        "name": "my-app-030"
     }
 ]
 ```
