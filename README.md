@@ -66,3 +66,16 @@ If no range paramaters are provided, the response will be issued according to th
 ```
 
 ## How It Works
+
+### Technologies Used
+- [Node.js](https://nodejs.org/en/) as a back-end environment
+- [Express](https://expressjs.com/) as a server framework
+
+### Logic
+When a request is made, we first check if the request contains at least one query:
+```
+if (JSON.stringify(req.query) !== "{}") {
+// logic for handling a request with one or multiple queries
+}
+```
+
