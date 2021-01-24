@@ -20,22 +20,13 @@ const getApps = (req, res) => {
 
   const by = req.query.by;
 
-  let start = 1;
-  let end = 5;
-  let max;
+  let start = req.query.start ? Number(req.query.start) : 1;
+  let max = req.query.max ? Number(req.query.max) : 5;
+  let end = req.query.end ? Number(req.query.end) : start + max - 1;
   let order = "asc";
 
-  if (req.query.start) {
-    start = Number(req.query.start);
-    end = start + 5;
-  }
-  if (req.query.end) {
-    end = Number(req.query.end);
-  }
-  if (req.query.max) {
-    max = Number(req.query.max);
-  } else {
-    max = end - start;
+  if (end > start + max) {
+    end = start + max - 1;
   }
 
   if (req.query.order) {
@@ -47,21 +38,9 @@ const getApps = (req, res) => {
   console.log("end: ", end);
   console.log("max: ", max);
   console.log("order: ", order);
-
-  // by id
-  const startIndex = start - 1;
-  let endIndex = startIndex + Number(max);
-  if (end - start < max) {
-    endIndex = end;
-  }
-
-  // if there is no max but there is start & end, and end - start
-
-  console.log("startIndex: ", startIndex);
-  console.log("endIndex: ", endIndex);
   console.log("-------------------");
 
-  const paginatedApps = apps.slice(startIndex, endIndex);
+  const paginatedApps = apps.slice(start - 1, end);
   res.json(paginatedApps);
 };
 
