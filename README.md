@@ -14,7 +14,7 @@ If requesting data within a certain range, the following query parameters are av
 |  `end` | no   | any number between zero and the number of items in the data set (seeded data set contains 105 entries) |
 |  `order` | no   | asc, desc    |
 
-*Not required if making a request without range parameters 
+*Not required if making a request with no range parameters 
 
 ### Default Values
 If no range paramaters are provided, the response will be issued according to the following defaults. 
@@ -74,7 +74,7 @@ If no range paramaters are provided, the response will be issued according to th
 - [Express](https://expressjs.com/) as a server framework
 
 ### Logic
-To issue the response, we `slice` the data set using start and end indices according to the request's query parameters (or default values). This subset is returned to the user in JSON format. 
+To issue a response, we `slice` the data set using start and end indices according to the request's query parameters (or default values). This subset is returned to the user in JSON format.   
 <br/>
 When a request is made, we first check if the request contains at least one query parameter:
 ```
