@@ -33,15 +33,25 @@ const getApps = (req, res) => {
     order = req.query.order;
   }
 
-  console.log("by: ", by);
-  console.log("start: ", start);
-  console.log("end: ", end);
-  console.log("max: ", max);
-  console.log("order: ", order);
-  console.log("-------------------");
+  //   console.log("by: ", by);
+  //   console.log("start: ", start);
+  //   console.log("end: ", end);
+  //   console.log("max: ", max);
+  //   console.log("order: ", order);
+  //   console.log("-------------------");
 
-  const paginatedApps = apps.slice(start - 1, end);
-  res.json(paginatedApps);
+  const matchingApps = apps.slice(start - 1, end);
+
+  // part of "by id"
+  if (req.query.order) {
+    if (req.query.order === "desc") {
+      matchingApps.sort((a, b) => (a.id < b.id ? 1 : -1));
+    } else if (req.query.order !== "asc")
+      throw 'Invalid "order" value. The only valid values are "asc" and "desc".';
+  }
+  // throw new error "invalid "order" paramater. The only valid paramaters are "asc" and "desc"
+
+  res.json(matchingApps);
 };
 
 module.exports = getApps;
