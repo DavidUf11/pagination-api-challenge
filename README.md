@@ -76,7 +76,7 @@ If no range paramaters are provided, the response will be issued according to th
 ### Logic
 To issue a response, we `slice` the data set using start and end indices according to the request's query values (or default values). This subset is returned to the user in JSON format.   
 <br/>
-When a request is made, we first check if the request contains at least one query parameter:
+When a request is made, we first check if the request contains at least one query parameter (below). This way we know which portions of the logic to execute.
 ```JavaScript
 if (JSON.stringify(req.query) !== "{}") {
     // generate response data based on query paramaters
@@ -90,7 +90,7 @@ apps.sort((a, b) => (a.id > b.id ? 1 : -1));
 start = 1;
 end = 50;
 ```
-If the request contains at least one paramater, we first check the `by` parameter – whether it exists and is a valid value, and then whether to sort by `id` or `name` (below). This check is first as the value of `by` defines how we assign other paramater values.  
+If the request contains at least one paramater, we first check the `by` parameter – whether it exists and is a valid value, and then whether to sort by `id` or `name` (below). This check must cp,e first as the value of `by` defines how we assign other paramater values.  
 ```JavaScript
 if (!req.query.by) {
     res.send('Invalid query. "By" paramater is required; valid values are "id" and "name".');
@@ -110,20 +110,20 @@ if (!req.query.by) {
       }
   }
 ```
-Next we assign values for `start`, `max`, and `end` according to the query (or default values if they are not specified). If sorting by `id`, we simply use the numbers query values for `start`, `max`, and `end` (below). If sorting by `name`, we `slice` the last three chartacters of the `start` and `end` values to assign `start` and `end` values.   
+Next we assign values for `start`, `max`, and `end` according to the query (or default values if any are not specified). If sorting by `id`, we simply use the query values for `start`, `max`, and `end` (below). If sorting by `name`, we `slice` the last three chartacters of the `start` and `end` query values to assign `start` and `end`.   
 ```JavaScript
 start = req.query.start ? Number(req.query.start) : 1;
 max = req.query.max ? Number(req.query.max) : 50;
 end = req.query.end ? Number(req.query.end) : start + max - 1;
 ```
 Handling cases in which both an `end` and `max` value are defined, we defer to `max` if the `end` value extends beyond what can fit inside the
-maximum page-, subtracting one to attain adjust for the zero-indexed array containing the app data:
+maximum page, subtracting one to adjust for the fact that the array containing the app data is zero-indexed:
 ```JavaScript
 if (end > start + max) {
     end = start + max - 1;
 }
 ```
-Lastly, we check if an `order` query was sent and order the matching data accordingly, sorting by the appropriate `by` identifier (below). Since `asc` is the default, we only need to check for `desc` or invalid values. 
+Lastly, we check if an `order` query was sent and order the matching data accordingly, sorting by the appropriate `by` identifier (below). Since `asc` is the default, we only need to check for `desc` or invalid values. This check is last as it the ordering is applied only to the subset of data to be sent (as determined by `start`, `end`, and `max` values). 
 ```JavaScript
 if (req.query.order) {
     if (req.query.order === "desc") {
