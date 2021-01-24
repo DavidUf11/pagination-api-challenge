@@ -2,7 +2,7 @@
 An API for accessing a seeded data set of apps that returns paginated, JSON-format app data according to user queries. 
 
 ## Usage
-`GET` requests can be made directly in the browser at https://pagination-api-challenge.herokuapp.com/ or through an API client like [Postman](https://www.postman.com/).
+Requests can be made directly in the browser at https://pagination-api-challenge.herokuapp.com/ or through an API client like [Postman](https://www.postman.com/).
 ### Parameters 
 If requesting data within a certain range, the following query parameters are available. 
 
