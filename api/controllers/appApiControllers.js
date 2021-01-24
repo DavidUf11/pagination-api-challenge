@@ -28,7 +28,6 @@ const getApps = (req, res) => {
       start = req.query.start ? Number(req.query.start) : 1;
       max = req.query.max ? Number(req.query.max) : 5;
       end = req.query.end ? Number(req.query.end) : start + max - 1;
-      console.log("start: ", start, "max: ", max, "end: ", end);
     } else if (req.query.by === "name") {
       apps.sort((a, b) => (a.name > b.name ? 1 : -1));
       sortById = false;
@@ -40,7 +39,6 @@ const getApps = (req, res) => {
       end = req.query.end
         ? Number(req.query.end.slice(req.query.end.length - 3))
         : start + max - 1;
-      console.log("start: ", start, "max: ", max, "end: ", end);
     } else
       throw 'Invalid "by" value. The only valid values are "id" and "name".';
   } else
@@ -52,20 +50,8 @@ const getApps = (req, res) => {
     }
   }
 
-  if (req.query.order) {
-    order = req.query.order;
-  }
-
-  // console.log("start: ", start);
-  // console.log("end: ", end);
-  // console.log("max: ", max);
-  // console.log("order: ", order);
-  // console.log("-------------------");
-
   const matchingApps = apps.slice(start - 1, end);
-  console.log("start: ", start, "max: ", max, "end: ", end);
 
-  // part of "by id"
   if (req.query.order) {
     if (req.query.order === "desc") {
       sortById
@@ -74,7 +60,6 @@ const getApps = (req, res) => {
     } else if (req.query.order !== "asc")
       throw 'Invalid "order" value. The only valid values are "asc" and "desc".';
   }
-  // throw new error "invalid "order" paramater. The only valid paramaters are "asc" and "desc"
 
   res.json(matchingApps);
 };
