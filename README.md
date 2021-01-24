@@ -6,7 +6,13 @@ An API for accessing a seeeded data set of apps that returns paginated, JSON-for
 #### Parameters
 
 
-Making a `GET` request on the `/apps` endpoint  
+Making a `GET` request on the `/apps` endpoint 
+
+| Column 1       | Column 2     | Column 3     |
+| :------------- | :----------: | -----------: |
+|  Cell Contents | More Stuff   | And Again    |
+| You Can Also   | Put Pipes In | Like this \| |
+
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
 \begin{table}[]
