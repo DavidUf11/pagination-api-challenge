@@ -101,5 +101,6 @@ if (end > start + max) {
     end = start + max - 1;
 }
 ```
+Ultimately we issue a response containing the paginated subset of data ...
 
 
