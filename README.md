@@ -26,7 +26,9 @@ Making a `GET` request on the `/apps` endpoint
 #### Examples
 
 Request: `GET` from `https://pagination-api-challenge.herokuapp.com/apps?by=id&start=3&end=7&order=desc` 
-Response: ```[
+Response: 
+```
+[
     {
         "id": 7,
         "name": "my-app-007"
@@ -47,7 +49,8 @@ Response: ```[
         "id": 3,
         "name": "my-app-003"
     }
-]```
+]
+```
 
 ## Usage
 
