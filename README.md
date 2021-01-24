@@ -28,7 +28,7 @@ If no range paramaters are provided, the response will be issued according to th
 
 Request: `GET` from `https://pagination-api-challenge.herokuapp.com/apps?by=id&start=3&end=6&order=desc` 
 Response: 
-```
+```json
 [
     {
         "id": 6,
@@ -48,11 +48,10 @@ Response:
     }
 ]
 ```
-
-
+---
 Request `GET` from `https://pagination-api-challenge.herokuapp.com/apps?by=name&start=my-app-027&max=4`
 Response:
-```
+```json
 [
     {
         "id": 27,
