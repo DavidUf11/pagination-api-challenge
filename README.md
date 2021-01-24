@@ -46,7 +46,6 @@ Response:
 ]
 ```
 <br/>
-<br/>
 Request: `GET` from `https://pagination-api-challenge.herokuapp.com/apps?by=name&start=my-app-027&max=3`
 <br/>
 Response:
