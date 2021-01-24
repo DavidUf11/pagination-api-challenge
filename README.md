@@ -1,12 +1,10 @@
 # Pagination API Challenge
 An API for accessing a seeeded data set of apps that returns paginated, JSON-format app data according to user queries. 
 
-## Range Format 
+## Usage
 
-### Parameters
-
-
-Making a `GET` request on the `/apps` endpoint 
+### Parameters 
+If requesting data within a certain range, the following query parameters are available. 
 
 | Parameters       | Required?     | Valid Values|
 | :------------- | :----------: | :----------- |
@@ -17,7 +15,8 @@ Making a `GET` request on the `/apps` endpoint
 |  `order` | no   | asc, desc    |
 
 ### Default Values
-| Key | Value |
+If no range paramaters are provided, the response will be issued according to the following defaults. 
+| Key | Default Value |
 | :--- | :--- |
 |`by`| id |
 |`start`| 1 |
