@@ -94,20 +94,28 @@ If the request contains at least one paramater, we first check the `by` paramete
 ```
 if (!req.query.by) {
     res.send('Invalid query. "By" paramater is required; valid values are "id" and "name".');
+    
 } else {
+
     if (req.query.by === "id") {
         sortById = true;
         // logic to assign start, end, and max values
+        
       } else if (req.query.by === "name") {
         sortById = false;
         // logic to assign start, end, and max values
+        
       } else {
         res.send('Invalid "by" value. The only valid values are "id" and "name".');
       }
   }
 ```
 Next we assign values for `start`, `max`, and `end` according to the query (or default values if they are not specified). If sorting by `id`, we simply use the numbers query values for `start`, `max`, and `end`. If sorting by `name`, we `slice` the last three chartacters of the `start` and `end` values to assign `start` and `end` values.   
-<br/> 
+```JavaScript
+ start = req.query.start ? Number(req.query.start) : 1;
+        max = req.query.max ? Number(req.query.max) : 50;
+        end = req.query.end ? Number(req.query.end) : start + max - 1;
+```
 Handling cases in which both an `end` and `max` value are defined, we defer to `max` if the `end` value extends beyond what can fit inside the
 maximum page:
 ```
