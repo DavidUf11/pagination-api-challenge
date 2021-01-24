@@ -70,7 +70,6 @@ const getApps = (req, res) => {
   }
 
   matchingApps = apps.slice(start - 1, end);
-
   res.json(matchingApps);
 };
 
