@@ -1,5 +1,5 @@
 # Pagination API Challenge
-An API for accessing a seeded data set of apps that returns paginated, JSON-format app data according to user queries. 
+An API for accessing a seeded data set of apps that returns paginated, JSON-format data. 
 
 ## Usage
 Requests can be made directly in the browser at https://pagination-api-challenge.herokuapp.com/ or through an API client like [Postman](https://www.postman.com/).
@@ -14,7 +14,7 @@ If requesting data within a certain range, the following query parameters are av
 |  `end` | no   | any number between zero and the number of items in the data set (seeded data set contains 105 entries) |
 |  `order` | no   | asc, desc    |
 
-*Not required if making a request with no range parameters 
+*Not required if making a request with no range parameters, e.g. `GET` from `/apps`
 
 ### Default Values
 If no range paramaters are provided, the response will be issued according to the following defaults. 
