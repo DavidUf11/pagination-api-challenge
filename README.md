@@ -72,23 +72,32 @@ If no range paramaters are provided, the response will be issued according to th
 - [Express](https://expressjs.com/) as a server framework
 
 ### Logic
-To issue the response, we `slice` the data set using start and end indices according to query parameters in the request (or default values). This subset is returned to the user in JSON format. 
+To issue the response, we `slice` the data set using start and end indices according to the request's query parameters (or default values). This subset is returned to the user in JSON format. 
 <br/>
 When a request is made, we first check if the request contains at least one query parameter:
 ```
 if (JSON.stringify(req.query) !== "{}") {
-    // handling a request with a query
+    // generating response data based on query paramaters
 } else {
-    // sending the response based on default paramater values
+    // generating  response data based on default values
 }
 ```
-If the request contains no parameters, we sort the data by id in ascending order, and assign default start and end values:
+If the request contains no parameters, we sort the data by `id` in ascending order, and assign default `start` and `end` values:
 ```
 apps.sort((a, b) => (a.id > b.id ? 1 : -1));
     start = 1;
     end = 50;
 ```
-If the request contains at least one paramater, we first check the `by` parameter – if it exists and is a valid value, and then whether to sort by `id` or `name`.
+If the request contains at least one paramater, we first check the `by` parameter – whether it exists and is a valid value, and then whether to sort by `id` or `name`.
 <br>
-Next we assign values for `start`, `max`, and `end` according to the query (or default values if they are not specified). If 
+Next we assign values for `start`, `max`, and `end` according to the query (or default values if they are not specified). If sorting by `id`, we simply use the numbers query values for `start`, `max`, and `end`. If sorting by `name`, we `slice` the last three chartacters of the `start` and `end` values to assign `start` and `end` values. 
+<br/> 
+Handling cases in which both an `end` and `max` value are defined, we defer to `max` if the `end` value extends beyond what can fit inside the
+maximum page:
+```
+if (end > start + max) {
+    end = start + max - 1;
+}
+```
+
 
