@@ -8,11 +8,12 @@ If requesting data within a certain range, the following query parameters are av
 
 | Parameters       | Required?     | Valid Values|
 | :------------- | :----------: | :----------- |
-|  `by` | yes   | id, name    |
+|  `by` | yes*   | id, name    |
 |  `start` | no   | if ordering by id, any number corresponding to an id within the data set; if ordering by name, a name of any app within the data set |
 |  `end` | no   | if ordering by id, any number corresponding to an id within the data set; if ordering by name, a name of any app within the data set |
 |  `end` | no   | any number between zero and the number of items in the data set (seeded data set contains 105 entries) |
 |  `order` | no   | asc, desc    |
+*Not required if making a request without range parameters 
 
 ### Default Values
 If no range paramaters are provided, the response will be issued according to the following defaults. 
