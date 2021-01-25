@@ -124,7 +124,7 @@ if (end > start + max) {
     end = start + max - 1;
 }
 ```
-Lastly, we check if an `order` query was sent and order the matching data accordingly, sorting by the appropriate `by` identifier (below). Since `asc` is the default, we only need to check for `desc` or invalid values. This check is last as it the ordering is applied only to the subset of data to be sent (as determined by `start`, `end`, and `max` values). 
+Lastly, we check if an `order` query was sent and order the matching data accordingly, sorting by the appropriate `by` identifier (below). Since `asc` is the default, we only need to check for `desc` or invalid values. This check is last as the ordering is applied only to the subset of data to be sent. 
 ```JavaScript
 if (req.query.order) {
     if (req.query.order === "desc") {
