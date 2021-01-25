@@ -91,7 +91,7 @@ apps.sort((a, b) => (a.id > b.id ? 1 : -1));
 start = 1;
 end = 50;
 ```
-If the request contains at least one paramater, we first check the `by` parameter – whether it exists and is a valid value, and then whether to sort by `id` or `name` (below). This check must cp,e first as the value of `by` defines how we assign other paramater values.  
+If the request includes a query, we first check the `by` parameter – whether it exists and is a valid value, and then whether to sort by `id` or `name` (below). This check must come first as the value of `by` defines how we assign other paramater values.  
 ```JavaScript
 if (!req.query.by) {
     res.send('Invalid query. "By" paramater is required; valid values are "id" and "name".');
