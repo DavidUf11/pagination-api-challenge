@@ -72,6 +72,7 @@ If no range paramaters are provided, the response will be issued according to th
 ### Technologies Used
 - [Node.js](https://nodejs.org/en/) as a back-end environment
 - [Express](https://expressjs.com/) as a server framework
+- [Nodemon](https://nodemon.io/) for automatic server restart in development
 
 ### Logic
 To issue a response, we `slice` the data set using start and end indices according to the request's query values (or default values). This subset is returned to the user in JSON format.   
