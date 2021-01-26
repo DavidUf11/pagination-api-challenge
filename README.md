@@ -103,7 +103,7 @@ If no range paramaters are provided, the response will be issued according to th
 
 ### Code 
 
-2. Checking for at least one query parameter.
+**2. Checking for at least one query parameter.**
 ```JavaScript
 if (JSON.stringify(req.query) !== "{}") {
     // generate response data based on query paramaters
@@ -112,7 +112,7 @@ if (JSON.stringify(req.query) !== "{}") {
 }
 ```
 
-3. Checking the `by` paramater
+**3.** Checking the `by` paramater
 ```JavaScript
 if (!req.query.by) {
     res.send('Invalid query. "By" paramater is required; valid values are "id" and "name".');
@@ -133,14 +133,16 @@ if (!req.query.by) {
   }
 ```
 
-4. Assigning paramater values if sorting by `id`
+#### 4 
+Assigning paramater values if sorting by `id`
 ```JavaScript
 start = req.query.start ? Number(req.query.start) : 1;
 max = req.query.max ? Number(req.query.max) : 50;
 end = req.query.end ? Number(req.query.end) : start + max - 1;
 ```
 
-6. Checking the `order` paramater
+#### 6
+Checking the `order` paramater
 ```JavaScript
 if (req.query.order) {
     if (req.query.order === "desc") {
