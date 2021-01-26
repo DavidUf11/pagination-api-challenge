@@ -1,5 +1,4 @@
-const e = require("express"),
-  apps = require("../seedData");
+const apps = require("../seedData");
 
 let sortById;
 let start;
@@ -8,6 +7,10 @@ let end;
 let matchingApps;
 
 const getApps = (req, res) => {
+  const justNameObjects = apps.map(({ id, ...rest }) => ({ ...rest }));
+  const appNames = [];
+  justNameObjects.forEach((obj) => appNames.push(obj.name));
+
   if (JSON.stringify(req.query) !== "{}") {
     if (!req.query.by) {
       res.send(
@@ -25,12 +28,14 @@ const getApps = (req, res) => {
         sortById = false;
         apps.sort((a, b) => (a.name > b.name ? 1 : -1));
 
-        start = req.query.start
-          ? Number(req.query.start.slice(req.query.start.length - 3))
-          : 1;
+        // set query name to start; include spaces in query?
+        // if not, make default equal to the app name at index 0, end at index 50
+        // handle creating matchingApps using names
+
+        start = req.query.start ? appNames.indexOf(req.query.start) + 1 : 1;
         max = req.query.max ? Number(req.query.max) : 50;
         end = req.query.end
-          ? Number(req.query.end.slice(req.query.end.length - 3))
+          ? appNames.indexOf(req.query.end) + 1
           : start + max - 1;
       } else
         res.send(
@@ -50,6 +55,7 @@ const getApps = (req, res) => {
     if (max < 1) throw 'Invalid query. "Max" value must be greater than zero.';
     if (end < start)
       res.send('Invalid query. "End" value cannot be less than "start" value.');
+    // create counterpart error for sorting by name
 
     matchingApps = apps.slice(start - 1, end);
 
