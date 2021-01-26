@@ -88,7 +88,7 @@ If no range paramaters are provided, the response will be issued according to th
 
 1. To generate a subset of data to return, we can `slice` the original the data set. To do so, we will need to dynamically generate start and end indices according to the request's query values (or default values). 
 
-2. Firstly, we need to know if the request contains at least one query parameter. If not, we can send the response right away using default values. [Code](####-2.-Checking-for-at-least-one-query-parameter)
+2. Firstly, we need to know if the request contains at least one query parameter. If not, we can send the response right away using default values. [Code](####-2-Checking-for-at-least-one-query-parameter)
 
 3. If the response does contain a query, we first need to check the `by` parameter since this defines how we will assign other paramater values. We check whether it exists & is a valid value, and then whether to sort by `id` or `name`  
 
@@ -103,7 +103,7 @@ If no range paramaters are provided, the response will be issued according to th
 
 ### Code 
 
-#### 2. Checking for at least one query parameter
+#### 2 Checking for at least one query parameter
 ```JavaScript
 if (JSON.stringify(req.query) !== "{}") {
     // generate response data based on query paramaters
