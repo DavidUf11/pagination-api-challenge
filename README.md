@@ -101,7 +101,7 @@ See [the below section](#Selected-Code) below for selected code snippets associa
 7. Ultimately we issue a response in JSON format containing the paginated subset of data, where `apps` is the original, seeded data set: 
 
 
-### Selected Code 
+### Selected Code Snippets
 
 #### 2. Checking for at least one query parameter
 ```JavaScript
