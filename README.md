@@ -1,4 +1,4 @@
-# Pagination API Challenge
+# Paginated API Challenge
 An API for accessing a seeded data set of apps that returns paginated, JSON-format data. 
 
 ## Usage
@@ -72,6 +72,7 @@ If no range paramaters are provided, the response will be issued according to th
 ### Technologies Used
 - [Node.js](https://nodejs.org/en/) as a back-end environment
 - [Express](https://expressjs.com/) as a server framework
+- [Nodemon](https://nodemon.io/) for automatic server restart in development
 
 ### Logic
 To issue a response, we `slice` the data set using start and end indices according to the request's query values (or default values). This subset is returned to the user in JSON format.   
@@ -90,7 +91,7 @@ apps.sort((a, b) => (a.id > b.id ? 1 : -1));
 start = 1;
 end = 50;
 ```
-If the request contains at least one paramater, we first check the `by` parameter – whether it exists and is a valid value, and then whether to sort by `id` or `name` (below). This check must cp,e first as the value of `by` defines how we assign other paramater values.  
+If the request includes a query, we first check the `by` parameter – whether it exists and is a valid value, and then whether to sort by `id` or `name` (below). This check must come first as the value of `by` defines how we assign other paramater values.  
 ```JavaScript
 if (!req.query.by) {
     res.send('Invalid query. "By" paramater is required; valid values are "id" and "name".');
@@ -123,7 +124,7 @@ if (end > start + max) {
     end = start + max - 1;
 }
 ```
-Lastly, we check if an `order` query was sent and order the matching data accordingly, sorting by the appropriate `by` identifier (below). Since `asc` is the default, we only need to check for `desc` or invalid values. This check is last as it the ordering is applied only to the subset of data to be sent (as determined by `start`, `end`, and `max` values). 
+Lastly, we check if an `order` query was sent and order the matching data accordingly, sorting by the appropriate `by` identifier (below). Since `asc` is the default, we only need to check for `desc` or invalid values. This check is last as the ordering is applied only to the subset of data to be sent. 
 ```JavaScript
 if (req.query.order) {
     if (req.query.order === "desc") {
