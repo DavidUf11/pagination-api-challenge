@@ -89,9 +89,9 @@ const getApps = (req, res) => {
     apps.sort((a, b) => (a.id > b.id ? 1 : -1));
     start = 1;
     end = 50;
+    matchingApps = apps.slice(start - 1, end);
   }
 
-  matchingApps = apps.slice(start - 1, end);
   res.json(matchingApps);
 };
 
