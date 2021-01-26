@@ -9,7 +9,7 @@ let matchingApps;
 const getApps = (req, res) => {
   const justNameObjects = apps.map(({ id, ...rest }) => ({ ...rest }));
   const appNames = [];
-  justNameObjects.forEach((obj) => appNames.push(obj.name));
+  justNameObjects.forEach((obj) => appNames.push(obj.name.toLowerCase()));
 
   if (JSON.stringify(req.query) !== "{}") {
     if (!req.query.by) {
@@ -32,10 +32,12 @@ const getApps = (req, res) => {
         // if not, make default equal to the app name at index 0, end at index 50
         // handle creating matchingApps using names
 
-        start = req.query.start ? appNames.indexOf(req.query.start) + 1 : 1;
+        start = req.query.start
+          ? appNames.indexOf(req.query.start.toLowerCase()) + 1
+          : 1;
         max = req.query.max ? Number(req.query.max) : 50;
         end = req.query.end
-          ? appNames.indexOf(req.query.end) + 1
+          ? appNames.indexOf(req.query.end.toLowerCase()) + 1
           : start + max - 1;
       } else
         res.send(
@@ -50,11 +52,20 @@ const getApps = (req, res) => {
     }
 
     if (start < 1)
-      throw 'Invalid query. "Start" value must be greater than zero.';
-    if (end < 1) throw 'Invalid query. "End" value must be greater than zero.';
+      sortById
+        ? res.send('Invalid query. "Start" value must be greater than zero.')
+        : res.send(
+            `Invalid query. "${req.query.start}" does not exist in the data set.`
+          );
+    if (end < 1)
+      sortById
+        ? res.send('Invalid query. "End" value must be greater than zero.')
+        : res.send(
+            `Invalid query. "${req.query.end}" does not exist in the data set.`
+          );
     if (max < 1) throw 'Invalid query. "Max" value must be greater than zero.';
     if (end < start)
-      res.send('Invalid query. "End" value cannot be less than "start" value.');
+      res.send('Invalid query. "End" record cannot precede "start" record.');
     // create counterpart error for sorting by name
 
     matchingApps = apps.slice(start - 1, end);
