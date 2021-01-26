@@ -94,9 +94,9 @@ See [the below section](#Selected-Code) below for selected code snippets.
 
 4. Next we assign values for `start`, `max`, and `end`. Since these paramaters are optional, we must check if the request contains paramaters for each. Using conditional logic, we either a sign a value based on the query or a default value to each of `start`, `max`, and `end`. 
 
-5. Importantly, the start and end indices we use to `slice` the data set must be numerical. If sorting by `id`, assigning these values is straightforward. If by `name` however, we must generate a new array containing all of the `name` values in the data set, and assign `start` and `end` values based on the index of the app name matching the query.  
+5. Importantly, the start and end indices we use to `slice` the data set must be numerical. If sorting by `id`, assigning these values is straightforward. If by `name` however, we generate a new array containing all of the `name` values in the data set, and assign `start` and `end` values based on the index of the app name matching the query.  
 
-6. Lastly, we check if an `order` value was included in the query. This check takes place after the subset to be sent has already been generated so as not to interfere with the logic that accomplishes this. If an `order` value was included, we only need to check for `desc` or invalid values. We `sort` the subset accordingly. 
+6. Lastly, we check if an `order` value was included in the query. This check takes place after the subset of apps has been generated so as not to interfere with the logic that accomplishes this. If an `order` value was included, we only need to check for `desc` or invalid values since `asc` is the default. We `sort` the subset accordingly. 
 
 7. Ultimately we issue a response in JSON format containing the paginated subset of data, where `apps` is the original, seeded data set: 
 
