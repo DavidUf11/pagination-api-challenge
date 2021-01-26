@@ -1,8 +1,16 @@
 # Paginated API Challenge
-An API for accessing a seeded data set of apps that returns paginated, JSON-format data. 
+An API for accessing a seeded data set of apps that returns paginated, JSON-format data
 
 ## Usage
 Requests can be made directly in the browser at https://pagination-api-challenge.herokuapp.com/ or through an API client like [Postman](https://www.postman.com/).
+### Content
+The data contains 105 JSON objects representing apps with randomly generated app names and IDs that enumarate the objects. For example: 
+```JSON
+    {
+        "id": 66,
+        "name": "Distributed scalable project"
+    }
+```
 ### Parameters 
 If requesting data within a certain range, the following query parameters are available. 
 
