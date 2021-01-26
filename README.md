@@ -1,4 +1,4 @@
-# Pagination API Challenge
+# Paginated API Challenge
 An API for accessing a seeded data set of apps that returns paginated, JSON-format data. 
 
 ## Usage
