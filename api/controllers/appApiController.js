@@ -48,8 +48,8 @@ const getApps = (req, res) => {
     }
 
     if (
-      (sortById && typeof start !== "Number") ||
-      (sortById && typeof end !== "Number")
+      (sortById && typeof start !== "number") ||
+      (sortById && typeof end !== "number")
     ) {
       res.send(
         "Invalid query. If sorting by ID, starting and ending values must be numerical."
