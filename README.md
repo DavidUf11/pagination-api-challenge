@@ -1,17 +1,25 @@
 # Paginated API Challenge
-An API for accessing a seeded data set of apps that returns paginated, JSON-format data. 
+An API for accessing a seeded data set of apps that returns paginated, JSON-format data
 
 ## Usage
 Requests can be made directly in the browser at https://pagination-api-challenge.herokuapp.com/ or through an API client like [Postman](https://www.postman.com/).
+### Content
+The data set contains 105 objects representing apps with randomly generated app names and IDs that enumarate those objects. For example: 
+```JSON
+{
+    "id": 66,
+    "name": "Distributed scalable project"
+}
+```
 ### Parameters 
 If requesting data within a certain range, the following query parameters are available. 
 
 | Parameters       | Required?     | Valid Values|
 | :------------- | :----------: | :----------- |
 |  `by` | yes*   | id, name    |
-|  `start` | no   | if ordering by id, any number corresponding to an id within the data set; if ordering by name, a name of any app within the data set |
-|  `end` | no   | if ordering by id, any number corresponding to an id within the data set; if ordering by name, a name of any app within the data set |
-|  `max` | no   | any number between zero and the number of items in the data set (seeded data set contains 105 entries) |
+|  `start` | no   | if ordering by id, any number corresponding to an id within the data set; if ordering by name, the name of any app within the data set |
+|  `end` | no   | if ordering by id, any number corresponding to an id within the data set; if ordering by name, the name of any app within the data set |
+|  `max` | no   | any number between one and the number of items in the data set (seeded data set contains 105 entries) |
 |  `order` | no   | asc, desc    |
 
 *Not required if making a request with no range parameters, e.g. `GET` from `/apps`
@@ -34,35 +42,35 @@ If no range paramaters are provided, the response will be issued according to th
 ```json
 [
     {
-        "id": 6,
-        "name": "my-app-006"
+        "id": 4,
+        "name": "Mandatory bottom-line encryption"
     },
     {
         "id": 5,
-        "name": "my-app-005"
+        "name": "Reactive static matrices"
     },
     {
-        "id": 4,
-        "name": "my-app-004"
+        "id": 6,
+        "name": "Triple-buffered client-server framework"
     }
 ]
 ```
 ---
-**Request:** `GET` from `/apps?by=name&start=my-app-027&max=3`  
+**Request:** `GET` from `/apps?by=name&start=distributed scalable project&max=3`  
 **Response:**
 ```json
 [
     {
-        "id": 27,
-        "name": "my-app-027"
+        "id": 66,
+        "name": "Distributed scalable project"
     },
     {
-        "id": 28,
-        "name": "my-app-028"
+        "id": 55,
+        "name": "Diverse system-worthy intranet"
     },
     {
-        "id": 29,
-        "name": "my-app-029"
+        "id": 41,
+        "name": "Down-sized zero administration utilisation"
     }
 ]
 ```
@@ -73,8 +81,10 @@ If no range paramaters are provided, the response will be issued according to th
 - [Node.js](https://nodejs.org/en/) as a back-end environment
 - [Express](https://expressjs.com/) as a server framework
 - [Nodemon](https://nodemon.io/) for automatic server restart in development
+- [Faker](https://github.com/Marak/Faker.js#readme) to generate seed data
+- [Heroku](https://www.heroku.com/) for deployment
 
-### Logic
+### Code & Reasoning
 To issue a response, we `slice` the data set using start and end indices according to the request's query values (or default values). This subset is returned to the user in JSON format.   
 <br/>
 When a request is made, we first check if the request contains at least one query parameter (below). This way we know which portions of the logic to execute.
@@ -91,7 +101,7 @@ apps.sort((a, b) => (a.id > b.id ? 1 : -1));
 start = 1;
 end = 50;
 ```
-If the request includes a query, we first check the `by` parameter – whether it exists and is a valid value, and then whether to sort by `id` or `name` (below). This check must come first as the value of `by` defines how we assign other paramater values.  
+If the request includes a query, we first check the `by` parameter – whether it exists and is a valid value, and then whether to sort by `id` or `name` (below). For requests with queries, this check must come first as the value of `by` defines how we assign other paramater values.  
 ```JavaScript
 if (!req.query.by) {
     res.send('Invalid query. "By" paramater is required; valid values are "id" and "name".');
