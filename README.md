@@ -85,7 +85,7 @@ If no range paramaters are provided, the response will be issued according to th
 - [Heroku](https://www.heroku.com/) for deployment
 
 ### Approach
-See [the below section](#Selected-Code) below for selected code snippets. 
+See [the below section](#Selected-Code) below for selected code snippets associated with the following steps. 
 1. To generate a subset of data to return, we can `slice` the original the data set. To do so, we will need to dynamically generate start and end indices according to the request's query values (or default values). 
 
 2. Firstly, we need to know if the request contains at least one query parameter. If not, we can send the response right away using default values. 
