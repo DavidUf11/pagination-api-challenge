@@ -1,12 +1,12 @@
 const express = require("express"),
   app = express(),
-  getApps = require("./api/controllers/appApiControllers");
+  getApps = require("./api/controllers/appApiController");
 
 app.get("/apps", getApps);
 
 app.get("", (req, res) =>
   res.send(
-    "Welcome to David's paginated app API. See https://github.com/DavidUf11/pagination-api-challenge/blob/main/README.md for usage instructions."
+    "Welcome to David's paginated app API. Visit t.ly/qkM7 for usage instructions."
   )
 );
 

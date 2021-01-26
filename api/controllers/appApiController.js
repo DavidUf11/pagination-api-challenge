@@ -28,10 +28,6 @@ const getApps = (req, res) => {
         sortById = false;
         apps.sort((a, b) => (a.name > b.name ? 1 : -1));
 
-        // set query name to start; include spaces in query?
-        // if not, make default equal to the app name at index 0, end at index 50
-        // handle creating matchingApps using names
-
         start = req.query.start
           ? appNames.indexOf(req.query.start.toLowerCase()) + 1
           : 1;
@@ -51,22 +47,31 @@ const getApps = (req, res) => {
       }
     }
 
+    if (
+      (sortById && typeof start !== "Number") ||
+      (sortById && typeof end !== "Number")
+    ) {
+      res.send(
+        "Invalid query. If sorting by ID, starting and ending values must be numerical."
+      );
+    }
+
     if (start < 1)
       sortById
         ? res.send('Invalid query. "Start" value must be greater than zero.')
         : res.send(
-            `Invalid query. "${req.query.start}" does not exist in the data set.`
+            `Invalid query. "${req.query.start}" is not an app in the data set.`
           );
     if (end < 1)
       sortById
         ? res.send('Invalid query. "End" value must be greater than zero.')
         : res.send(
-            `Invalid query. "${req.query.end}" does not exist in the data set.`
+            `Invalid query. "${req.query.end}" is not an app in the data set.`
           );
-    if (max < 1) throw 'Invalid query. "Max" value must be greater than zero.';
+    if (max < 1)
+      res.send('Invalid query. "Max" value must be greater than zero.');
     if (end < start)
-      res.send('Invalid query. "End" record cannot precede "start" record.');
-    // create counterpart error for sorting by name
+      res.send("Invalid query. Ending record cannot precede starting record.");
 
     matchingApps = apps.slice(start - 1, end);
 

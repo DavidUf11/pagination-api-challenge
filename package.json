@@ -5,6 +5,7 @@
   "author": "Daviduf11 <ufberg.david@gmail.com> (https://daviduf.com)",
   "description": "An HTTP endpoint which performs pagination on a seeded dataset, built as part of a QA Challenge",
   "license": "MIT",
+  "homepage": "https://pagination-api-challenge.herokuapp.com/",
   "dependencies": {
     "express": "^4.17.1",
     "faker": "^5.2.0"
