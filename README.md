@@ -14,7 +14,7 @@ The data set contains 105 objects representing apps with randomly generated app 
 ### Parameters 
 If requesting data within a certain range, the following query parameters are available. 
 
-| Parameters       | Required?     | Valid Values|
+| Parameter       | Required?     | Valid Values|
 | :------------- | :----------: | :----------- |
 |  `by` | yes*   | id, name    |
 |  `start` | no   | if ordering by id, any number corresponding to an id within the data set; if ordering by name, the name of any app within the data set |
