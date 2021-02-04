@@ -98,7 +98,7 @@ See [the below section](#Selected-Code-Snippets) below for selected code snippet
 
 6. Lastly, we check if an `order` value was included in the query. This check takes place after the subset of apps has been generated so as not to interfere with the logic that accomplishes this. If an `order` value was included, we only need to check for `desc` or invalid values since `asc` is the default. We `sort` the subset accordingly. 
 
-7. Ultimately we issue a response in JSON format containing the paginated subset of data, where `apps` is the original, seeded data set. 
+7. Ultimately we issue a response in JSON format containing the paginated subset of data. 
 
 
 ### Selected Code Snippets
