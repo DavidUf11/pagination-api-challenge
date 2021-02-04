@@ -90,7 +90,7 @@ See [the below section](#Selected-Code-Snippets) below for selected code snippet
 
 2. Firstly, we need to know if the request contains at least one query parameter. If not, we can send the response right away using default values. 
 
-3. If the response does contain a query, we first need to check the `by` parameter since this defines how we will assign other paramater values. We check whether it exists & is a valid value, and then whether to sort by `id` or `name`  
+3. If the response does contain a query, we first need to check the `by` parameter since this defines how we will assign other paramater values. We check whether it exists & is a valid value, and then whether to sort by `id` or `name`.  
 
 4. Next we assign values for `start`, `max`, and `end`. Since these paramaters are optional, we must check if the request contains paramaters for each. Using conditional logic, we either a sign a value based on the query or a default value to each of `start`, `max`, and `end`. 
 
@@ -98,7 +98,7 @@ See [the below section](#Selected-Code-Snippets) below for selected code snippet
 
 6. Lastly, we check if an `order` value was included in the query. This check takes place after the subset of apps has been generated so as not to interfere with the logic that accomplishes this. If an `order` value was included, we only need to check for `desc` or invalid values since `asc` is the default. We `sort` the subset accordingly. 
 
-7. Ultimately we issue a response in JSON format containing the paginated subset of data, where `apps` is the original, seeded data set: 
+7. Ultimately we issue a response in JSON format containing the paginated subset of data, where `apps` is the original, seeded data set. 
 
 
 ### Selected Code Snippets
