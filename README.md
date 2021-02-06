@@ -14,7 +14,7 @@ The data set contains 105 objects representing apps with randomly generated app 
 ### Parameters 
 If requesting data within a certain range, the following query parameters are available. 
 
-| Parameters       | Required?     | Valid Values|
+| Parameter       | Required?     | Valid Values|
 | :------------- | :----------: | :----------- |
 |  `by` | yes*   | id, name    |
 |  `start` | no   | if ordering by id, any number corresponding to an id within the data set; if ordering by name, the name of any app within the data set |
@@ -42,7 +42,7 @@ If no range paramaters are provided, the response will be issued according to th
 ```json
 [
     {
-        "id": 4,
+        "id": 6,
         "name": "Mandatory bottom-line encryption"
     },
     {
@@ -50,7 +50,7 @@ If no range paramaters are provided, the response will be issued according to th
         "name": "Reactive static matrices"
     },
     {
-        "id": 6,
+        "id": 4,
         "name": "Triple-buffered client-server framework"
     }
 ]
@@ -85,12 +85,12 @@ If no range paramaters are provided, the response will be issued according to th
 - [Heroku](https://www.heroku.com/) for deployment
 
 ### Approach
-See [the below section](#Selected-Code) below for selected code snippets associated with the following steps. 
+See [the below section](#Selected-Code-Snippets) for selected code snippets associated with the following steps. 
 1. To generate a subset of data to return, we can `slice` the original the data set. To do so, we will need to dynamically generate start and end indices according to the request's query values (or default values). 
 
 2. Firstly, we need to know if the request contains at least one query parameter. If not, we can send the response right away using default values. 
 
-3. If the response does contain a query, we first need to check the `by` parameter since this defines how we will assign other paramater values. We check whether it exists & is a valid value, and then whether to sort by `id` or `name`  
+3. If the response does contain a query, we first need to check the `by` parameter since this defines how we will assign other paramater values. We check whether it exists & is a valid value, and then whether to sort by `id` or `name`.  
 
 4. Next we assign values for `start`, `max`, and `end`. Since these paramaters are optional, we must check if the request contains paramaters for each. Using conditional logic, we either a sign a value based on the query or a default value to each of `start`, `max`, and `end`. 
 
@@ -98,10 +98,10 @@ See [the below section](#Selected-Code) below for selected code snippets associa
 
 6. Lastly, we check if an `order` value was included in the query. This check takes place after the subset of apps has been generated so as not to interfere with the logic that accomplishes this. If an `order` value was included, we only need to check for `desc` or invalid values since `asc` is the default. We `sort` the subset accordingly. 
 
-7. Ultimately we issue a response in JSON format containing the paginated subset of data, where `apps` is the original, seeded data set: 
+7. Ultimately we issue a response in JSON format containing the paginated subset of data. 
 
 
-### Selected Code 
+### Selected Code Snippets
 
 #### 2. Checking for at least one query parameter
 ```JavaScript
