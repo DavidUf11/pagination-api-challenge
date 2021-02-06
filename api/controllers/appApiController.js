@@ -17,14 +17,14 @@ const getApps = (req, res) => {
         'Invalid query. "By" paramater is required; valid values are "id" and "name".'
       );
     } else {
-      if (req.query.by === "id") {
+      if (req.query.by.toLowerCase() === "id") {
         sortById = true;
         apps.sort((a, b) => (a.id > b.id ? 1 : -1));
 
         start = req.query.start ? Number(req.query.start) : 1;
         max = req.query.max ? Number(req.query.max) : 50;
         end = req.query.end ? Number(req.query.end) : start + max - 1;
-      } else if (req.query.by === "name") {
+      } else if (req.query.by.toLowerCase() === "name") {
         sortById = false;
         apps.sort((a, b) => (a.name > b.name ? 1 : -1));
 
